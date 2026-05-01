@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* Design tokens — mirror DESIGN.md exactly. Update DESIGN.md before changing any value here. */
+@theme {
+  /* Brand */
+  --color-tide: #00a3b4;
+  --color-tide-hover: #0091a0;
+  --color-tide-pressed: #007884;
+  --color-tide-subtle: #e6f7f8;
+
+  /* Citizen canvas (light) */
+  --color-canvas-citizen: #f7f6f4;
+  --color-surface-citizen: #ffffff;
+  --color-surface-mist: #eef0ee;
+  --color-surface-citizen-strong: #e3e6e1;
+  --color-surface-citizen-deep: #d6dad3;
+  --color-hairline-citizen: rgba(11, 31, 51, 0.1);
+  --color-hairline-citizen-strong: rgba(11, 31, 51, 0.16);
+
+  /* Operator canvas + surface ladder (dark) */
+  --color-canvas-operator: #020306;
+  --color-surface-1: #0d1014;
+  --color-surface-2: #13171c;
+  --color-surface-3: #181d23;
+  --color-surface-4: #1c2128;
+  --color-hairline: #1f2329;
+  --color-hairline-strong: #2a3038;
+
+  /* Ink (light) */
+  --color-heading: #0b1f33;
+  --color-body: #3a4a5e;
+  --color-muted: #6b7889;
+  --color-disabled: #a4adba;
+
+  /* Ink (dark) */
+  --color-ink: #f4f6f9;
+  --color-ink-muted: #c8cfda;
+  --color-ink-subtle: #8b94a3;
+  --color-ink-tertiary: #5d6675;
+
+  /* Risk scale — light variants */
+  --color-risk-calm-fill: #e6f6ec;
+  --color-risk-calm-text: #107a3d;
+  --color-risk-watch-fill: #fff7df;
+  --color-risk-watch-text: #7a5b00;
+  --color-risk-warning-fill: #ffe8d6;
+  --color-risk-warning-text: #a04a00;
+  --color-risk-severe-fill: #ffe1e1;
+  --color-risk-severe-text: #a8131a;
+
+  /* Risk scale — dark variants */
+  --color-risk-calm-dark-fill: #0e2a18;
+  --color-risk-calm-dark-text: #5fd28a;
+  --color-risk-watch-dark-fill: #2a2308;
+  --color-risk-watch-dark-text: #f5cf4a;
+  --color-risk-warning-dark-fill: #2c1a08;
+  --color-risk-warning-dark-text: #ff9a3e;
+  --color-risk-severe-dark-fill: #2e0c0e;
+  --color-risk-severe-dark-text: #ff6970;
+
+  /* Map / data viz */
+  --color-water: #2563d4;
+  --color-route-primary: #00a3b4;
+  --color-route-alternate: #7a5fdb;
+  --color-marker-shelter: #107a3d;
+  --color-marker-sensor: #3a4a5e;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+  /* Component aliases for vocabulary */
+  --radius-button: 6px;
+  --radius-card: 12px;
+
+  /* Shadows */
+  --shadow-card:
+    rgba(0, 40, 55, 0.18) 0px 24px 40px -24px,
+    rgba(11, 31, 51, 0.08) 0px 12px 28px -10px;
+  --shadow-modal:
+    rgba(0, 40, 55, 0.28) 0px 32px 64px -24px,
+    rgba(0, 40, 55, 0.18) 0px 24px 40px -24px,
+    rgba(11, 31, 51, 0.08) 0px 12px 28px -10px;
+  --shadow-ambient: rgba(11, 31, 51, 0.04) 0px 1px 2px;
+}
+
+/* Base — citizen canvas as default; route-group layouts override for operator. */
+html,
+body {
+  font-family: var(--font-sans), -apple-system, "SF Pro Display", system-ui,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  background-color: var(--color-canvas-citizen);
+  color: var(--color-heading);
+}
+
+/* Tabular numerals — apply to any data display (water levels, %, ETAs, distances). */
+.tnum {
+  font-feature-settings: "tnum";
+}
+
+/* Operator light variant — opt-in via `data-theme="light"` on the operator
+   layout root. Re-binds the operator canvas + surface ladder + ink tokens to
+   their citizen-side equivalents so existing className references (e.g.
+   `bg-surface-1`, `text-ink`) automatically pick up the light rendering with
+   no JSX changes. Citizen route never carries this attribute. */
+[data-theme="light"] {
+  --color-canvas-operator: var(--color-canvas-citizen);
+  --color-surface-1: var(--color-surface-citizen);
+  --color-surface-2: var(--color-surface-mist);
+  --color-surface-3: var(--color-surface-citizen-strong);
+  --color-surface-4: var(--color-surface-citizen-deep);
+  --color-hairline: var(--color-hairline-citizen);
+  --color-hairline-strong: var(--color-hairline-citizen-strong);
+  --color-ink: var(--color-heading);
+  --color-ink-muted: var(--color-body);
+  --color-ink-subtle: var(--color-muted);
+  --color-ink-tertiary: var(--color-disabled);
+}
